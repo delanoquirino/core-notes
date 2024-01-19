@@ -7,6 +7,7 @@ export const AddTaskForm = () => {
       <div className="py-3 px-4 flex gap-4">
         <input
           type="text"
+          name="title"
           placeholder="Título"
           className="w-full placeholder:text-black outline-none bg-transparent font-bold text-sm"
         />
@@ -15,13 +16,15 @@ export const AddTaskForm = () => {
               type="checkbox"
               className="hidden"
               id="starCheckbox"
+              name="favorite"
             />
             <label htmlFor="starCheckbox" className="cursor-pointer">
               <IoIosStarOutline className="text-2xl mr-2" />
             </label>
         </div>
       </div>
-      <div className="border-t-2 p-2"><textarea className="w-full px-2 py-1 outline-none resize-none text-xs" placeholder="Criar Nota..."/></div>
+      <div className="border-t-2 py-2 px-4"><textarea name="task" className="w-full outline-none resize-none text-xs" placeholder="Criar Nota..."/></div>
+      <button type="submit" className="font-bold  text-sm cursor-pointerbg-red-200 py-2 px-4 hover:text-green-500 duration-300">Add+</button>
     </form>
   );
 };
