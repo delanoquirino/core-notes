@@ -1,5 +1,5 @@
 import express from "express"
-import userTasks from "./routes/tasks.js"
+import userRoutes from "./routes/tasks.js"
 import cors from "cors"
 
 const app = express()
@@ -7,6 +7,6 @@ const app = express()
 app.use(express.json()) 
 app.use(cors()) 
 
-app.use("/", userTasks) 
+app.use("/", userRoutes) 
 
 app.listen(8800)
