@@ -14,7 +14,7 @@ interface TasksProps {
 }
 
 export const CardTask = ({ tasks }: TasksProps) => {
-  console.log(tasks);
+  
   return (
     <>
       {tasks.map((item) => {
