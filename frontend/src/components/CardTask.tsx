@@ -4,7 +4,7 @@ import { IoIosStarOutline, IoMdClose } from "react-icons/io";
 
 export const CardTask = () => {
   return (
-    <div className="flex flex-col w-full max-w-[352px] h-[437px] mx-auto shadow-md shadow-gray-300 bg-white rounded-3xl">
+    <div className="flex flex-col w-full max-w-[390px] h-[437px] mx-auto shadow-md shadow-gray-300 bg-white rounded-3xl">
       <div className="py-3 px-4 flex gap-4">
         <div className="w-full font-bold text-sm">Titulo</div>
         <div>
