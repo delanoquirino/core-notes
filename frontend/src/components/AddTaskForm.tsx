@@ -3,7 +3,7 @@ import { IoIosStarOutline } from "react-icons/io";
 
 export const AddTaskForm = () => {
   return (
-    <form className="border-[2px] w-[90%] md:w-[60%] lg:w-[40%] mx-auto border-[#D9D9D9] shadow-lg shadow-gray-500 bg-white rounded-3xl md:rounded-none mt-6 ">
+    <form className="border-[2px] w-full max-w-[530px] mx-auto border-[#D9D9D9] shadow-lg shadow-gray-500 bg-white rounded-3xl md:rounded-none mt-6 ">
       <div className="py-3 px-4 flex gap-4">
         <input
           type="text"
