@@ -9,7 +9,7 @@ export const Header = () => {
       <div className="px-6 py-4 flex">
         <div className="flex gap-3 md:gap-4 items-center justify-center mr-4 md:mr-7">
           <div className="relative w-[29px] h-[29px] md:w-[36px] md:h-[36px]">
-              <Image src="/logo.svg" alt="My SVG" fill={true} />
+              <Image src="/logo.svg" alt="logo" fill={true} />
           </div>
           <h1 className="text-[11.45px] md:text-sm">CoreNotes</h1>
         </div>
