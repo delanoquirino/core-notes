@@ -10,7 +10,7 @@ export default function Home() {
   const [tasks, setTasks] = useState([]);
   const [onEdit, setOnEdit] = useState(null);
 
-  //buscar dados na api
+
   const getTasks = async () => {
     try {
       const res = await axios.get("http://localhost:8800");
@@ -23,10 +23,11 @@ export default function Home() {
       toast.error(error);
     }
   };
-
+  
   useEffect(() => {
     getTasks();
-  }, [setTasks]);
+  }, [tasks]);
+  
 
   return (
     <>
@@ -34,12 +35,12 @@ export default function Home() {
 
       <main className="flex min-h-screen flex-col items-center bg-[#F0F2F5]">
         <div className="container mx-auto px-4">
-          <AddTaskForm />
+          <AddTaskForm onEdit={onEdit} setOnEdit={setOnEdit} getTasks={getTasks}/>
 
           <div className=" mt-9">
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
           
-                <CardTask tasks={tasks} setTasks={setTasks} />
+                <CardTask tasks={tasks} setTasks={setTasks} setOnEdit={setOnEdit} />
               
             </div>
           </div>
