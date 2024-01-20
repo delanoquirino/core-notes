@@ -4,6 +4,7 @@ import { CardTask } from "@/components/CardTask";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 export default function Home() {
   const [tasks, setTasks] = useState([]);
@@ -38,7 +39,7 @@ export default function Home() {
           <div className=" mt-9">
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
           
-                <CardTask tasks={tasks}  />
+                <CardTask tasks={tasks} setTasks={setTasks} />
               
             </div>
           </div>
