@@ -8,17 +8,21 @@ interface Task {
   id: number;
   title: string;
   task: string;
-  favorite: boolean;
+  favorite: number;
 }
 
 interface TasksProps {
   tasks: Task[];
   setTasks: React.Dispatch<React.SetStateAction<Task[]>>;
-  
+  setOnEdit: React.Dispatch<React.SetStateAction<null>>;
 }
 
-
-export const CardTask = ({ tasks, setTasks }: TasksProps) => {
+export const CardTask = ({ tasks, setTasks, setOnEdit }: TasksProps) => {
+ 
+  const handleEdit = (taskData) => {
+    setOnEdit(taskData);
+  };
+ 
   const handleDelete = async (id: number) => {
     await axios
       .delete("http://localhost:8800/" + id)
@@ -29,28 +33,32 @@ export const CardTask = ({ tasks, setTasks }: TasksProps) => {
       })
       .catch(({ data }) => toast.error(data));
   };
+
   return (
     <>
-      {tasks.map((item) => {
+      {tasks.map((taskData) => {
         return (
           <div
-            key={item.id}
+            key={taskData.id}
             className="flex flex-col w-full max-w-[390px] h-[437px] mx-auto shadow-md shadow-gray-300 bg-white rounded-3xl"
           >
             <div className="py-3 px-4 flex gap-4">
-              <div className="w-full font-bold text-sm">{item.title}</div>
+              <div className="w-full font-bold text-sm">{taskData.title}</div>
               <div>
-                {item.favorite ? (
-                  <IoIosStarOutline className="text-2xl mr-2" />
+                {taskData.favorite ? (
+                  <IoIosStar className="text-2xl mr-2 text-yellow-400" />
                 ) : (
-                  <IoIosStar className="text-2xl mr-2" />
+                  <IoIosStarOutline className="text-2xl mr-2" />
                 )}
               </div>
             </div>
-            <div className="flex-1 border-t-2 py-3 px-4">{item.task}</div>
+            <div className="flex-1 border-t-2 py-3 px-4">{taskData.task}</div>
             <div className=" py-3 px-4 flex items-center justify-between">
               <div className="flex gap-2 ">
-                <button className="rounded-full duration-300">
+                <button
+                  onClick={() => handleEdit(taskData)}
+                  className="rounded-full duration-300"
+                >
                   <Image
                     className=""
                     src="/pincel.svg"
@@ -70,7 +78,7 @@ export const CardTask = ({ tasks, setTasks }: TasksProps) => {
               </div>
               <div className="">
                 <button
-                  onClick={() => handleDelete(item.id)}
+                  onClick={() => handleDelete(taskData.id)}
                   className="p-2 rounded-full duration-300"
                 >
                   <IoMdClose className="text-[#51646E]" />
