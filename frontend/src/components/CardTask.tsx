@@ -1,8 +1,9 @@
+"use client"
 import axios from "axios";
 import Image from "next/image";
-import React from "react";
 import { IoIosStar, IoIosStarOutline, IoMdClose } from "react-icons/io";
 import { toast } from "react-toastify";
+import { EditBgColor } from "./EditBgColor";
 
 interface Task {
   id: number;
@@ -15,14 +16,15 @@ interface TasksProps {
   tasks: Task[];
   setTasks: React.Dispatch<React.SetStateAction<Task[]>>;
   setOnEdit: React.Dispatch<React.SetStateAction<null>>;
+
 }
 
 export const CardTask = ({ tasks, setTasks, setOnEdit }: TasksProps) => {
- 
-  const handleEdit = (taskData) => {
+  
+   const handleEdit = (taskData) => {
     setOnEdit(taskData);
   };
- 
+
   const handleDelete = async (id: number) => {
     await axios
       .delete("http://localhost:8800/" + id)
@@ -33,7 +35,7 @@ export const CardTask = ({ tasks, setTasks, setOnEdit }: TasksProps) => {
       })
       .catch(({ data }) => toast.error(data));
   };
-
+  
   return (
     <>
       {tasks.map((taskData) => {
@@ -67,14 +69,7 @@ export const CardTask = ({ tasks, setTasks, setOnEdit }: TasksProps) => {
                     height={16}
                   />
                 </button>
-                <button className=" w-4 h-4">
-                  <Image
-                    src="/ink.svg"
-                    alt="tinta para trocar de cor"
-                    width={16}
-                    height={16}
-                  />
-                </button>
+                <EditBgColor />
               </div>
               <div className="">
                 <button
