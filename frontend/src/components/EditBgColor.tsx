@@ -1,11 +1,18 @@
 "use client";
-import { SetStateAction, useState } from "react";
+import { useState } from "react";
 import Popover from "@mui/material/Popover";
 import Typography from "@mui/material/Typography";
 import IconButton from "@mui/material/IconButton";
 import Image from "next/image";
+import { useTaskContext } from "@/context/TaskContext";
 
-export const EditBgColor = () => {
+export const EditBgColor = ({
+  ColorSelected,
+  taskId,
+}: {
+  ColorSelected: (cor: string, taskId:number) => void;
+  taskId: number;
+}) => {
   const [anchorEl, setAnchorEl] = useState<HTMLButtonElement | null>(null);
 
   const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
@@ -33,7 +40,13 @@ export const EditBgColor = () => {
     "#979797",
     "#A99A7C",
   ];
-  const handleLiClick = (color: string) => {};
+
+  const handleLiClick = (color: string) => {
+   
+    ColorSelected(color, taskId);
+
+    setAnchorEl(null);
+  };
 
   return (
     <div>
@@ -56,7 +69,7 @@ export const EditBgColor = () => {
         }}
       >
         <Typography sx={{ p: 1 }}>
-          <ul className="flex gap-1">
+          <ul className="flex gap-1 ">
             {colors.map((color, i) => (
               <li
                 className="p-3 rounded-full cursor-pointer hover:brightness-90"
