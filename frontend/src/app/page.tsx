@@ -8,7 +8,7 @@ export default function Home() {
   return (
     <>
       <ToastContainer autoClose={3000} position={"bottom-left"} />
-      <main className="bg-[#F0F2F5] min-h-screen ">
+      <main className="bg-[#F0F2F5] min-h-screen">
         <div className="max-w-[1440px] mx-auto px-4 py-4">
           <AddTaskForm />
           <div className=" pt-9">
