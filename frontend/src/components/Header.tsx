@@ -5,7 +5,7 @@ import { HiMagnifyingGlass } from "react-icons/hi2";
 
 export const Header = () => {
   return (
-    <header className="bg-white w-full">
+    <header className="fixed bg-white w-full">
       <div className="px-6 py-4 flex">
         <div className="flex gap-3 md:gap-4 items-center justify-center mr-4 md:mr-7">
           <div className="relative w-[29px] h-[29px] md:w-[36px] md:h-[36px]">
