@@ -6,6 +6,7 @@ import { SubmitHandler, useForm } from "react-hook-form";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import axios from "axios";
+import { useTaskContext } from "@/context/TaskContext";
 
 type Inputs = {
   title: string;
@@ -13,11 +14,12 @@ type Inputs = {
   favorite: boolean;
 };
 
-export const AddTaskForm = ({ onEdit, setOnEdit, getTasks }: any) => {
+export const AddTaskForm = () => {
+  const { onEdit, setOnEdit, getTasks } = useTaskContext();
+ 
   const {
     handleSubmit,register,
     reset,setValue,watch,
-    formState: { errors },
   } = useForm<Inputs>();
 
   useEffect(() => {
@@ -31,7 +33,7 @@ export const AddTaskForm = ({ onEdit, setOnEdit, getTasks }: any) => {
 
   const onSubmit: SubmitHandler<Inputs> = async (data: Inputs) => {
     const { title, task, favorite } = data;
-    console.log(watch("favorite"));
+    
     const taskData = {
       title: title,
       task: task,
