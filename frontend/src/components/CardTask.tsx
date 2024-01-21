@@ -76,7 +76,7 @@ export const CardTask = () => {
             <div
               key={taskData.id}
               style={{ backgroundColor: taskData.bgcolor }}
-              className="flex flex-col w-full max-w-[390px] h-[437px] mx-auto shadow-md shadow-gray-300 bg-white rounded-3xl"
+              className="flex flex-col w-full max-w-[300px] h-[437px] mx-auto shadow-md shadow-gray-300 bg-white rounded-3xl"
             >
               <div className="py-3 px-4 flex gap-4">
                 <div className="w-full font-bold text-sm">{taskData.title}</div>
