@@ -12,13 +12,14 @@ export const getTask = (_,res) => {
 
 export const addTask = (req, res) => {
     const q =
-      "INSERT INTO tasks(`title`, `task`, favorite) VALUES(?)";
+      "INSERT INTO tasks(`title`, `task`, favorite, bgcolor) VALUES(?)";
   
     const values = [
       
       req.body.title,
       req.body.task,
       req.body.favorite,
+      req.body.bgcolor
     ];
   
     db.query(q, [values], (err) => {
@@ -31,13 +32,14 @@ export const addTask = (req, res) => {
 
 export const updateTask = (req, res) => {
     const q =
-      "UPDATE tasks SET `title` = ?, `task` = ?, `favorite` = ? WHERE `id` = ?";
+      "UPDATE tasks SET `title` = ?, `task` = ?, `favorite` = ?, `bgcolor` = ? WHERE `id` = ?";
   
     const values = [
         
         req.body.title,
         req.body.task,
-        req.body.favorite
+        req.body.favorite,
+        req.body.bgcolor
     ];
   
     db.query(q, [...values, req.params.id], (err) => {
@@ -58,3 +60,13 @@ export const deleteTask = (req, res) => {
     });
 };
 
+export const updateTaskColor = (req, res) => {
+  const q = "UPDATE tasks SET `bgcolor` = ? WHERE `id` = ?";
+  const values = [req.body.bgcolor, req.params.id];
+
+  db.query(q, values, (err) => {
+    if (err) return res.status(500).json(err);
+
+    return res.status(200).json("Cor da tarefa atualizada com sucesso.");
+  });
+};
