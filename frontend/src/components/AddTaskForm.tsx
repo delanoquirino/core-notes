@@ -12,6 +12,7 @@ type Inputs = {
   title: string;
   task: string;
   favorite: boolean;
+  bgcolor: number;
 };
 
 export const AddTaskForm = () => {
@@ -27,25 +28,28 @@ export const AddTaskForm = () => {
       setValue("title", onEdit.title);
       setValue("task", onEdit.task);
       setValue("favorite", onEdit.favorite);
+      setValue("bgcolor", onEdit.bgcolor);
+      
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [onEdit]);
+
+  }, [onEdit, setValue]);
 
   const onSubmit: SubmitHandler<Inputs> = async (data: Inputs) => {
-    const { title, task, favorite } = data;
+    const { title, task, favorite, bgcolor } = data;
     
     const taskData = {
       title: title,
       task: task,
       favorite: favorite,
+      bgcolor: bgcolor,
     };
-
     if (onEdit) {
       await axios
         .put("http://localhost:8800/" + onEdit.id, {
           title: taskData.title,
           task: taskData.task,
           favorite: taskData.favorite,
+          bgcolor: taskData.bgcolor,
         })
         .then(({ data }) => toast.success(data))
         .catch(({ data }) => toast.error(data));
@@ -55,6 +59,7 @@ export const AddTaskForm = () => {
           title: taskData.title,
           task: taskData.task,
           favorite: taskData.favorite,
+          bgcolor: taskData.bgcolor,
         })
         .then(({ data }) => toast.success(data))
         .catch(({ data }) => toast.error(data));
