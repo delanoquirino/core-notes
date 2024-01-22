@@ -10,6 +10,7 @@ interface TaskContextProps {
   onEdit: any; 
   setOnEdit: React.Dispatch<React.SetStateAction<any>>; 
   getTasks: () => Promise<void>; 
+  loading:  boolean;
 }
 
 const TaskContext = createContext<TaskContextProps | undefined>(undefined);
@@ -17,6 +18,7 @@ const TaskContext = createContext<TaskContextProps | undefined>(undefined);
 export const TaskProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
   const [tasks, setTasks] = useState<any[]>([]); 
   const [onEdit, setOnEdit] = useState<any | null>(null); 
+  const [loading, setLoading] = useState(true);
 
   const getTasks = async () => {
     try {
@@ -27,7 +29,6 @@ export const TaskProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
           a.title > b.title ? 1 : -1
         )
       );
-     
     } catch ({ error }: any) {
       toast.error(error);
     }
@@ -35,6 +36,7 @@ export const TaskProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
   
   useEffect(() => {
     getTasks();
+    setLoading(false)
   }, [tasks]);
 
   const value: TaskContextProps = {
@@ -43,6 +45,7 @@ export const TaskProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
     onEdit,
     setOnEdit,
     getTasks,
+    loading
   };
 
   return <TaskContext.Provider value={value}>{children}</TaskContext.Provider>;
