@@ -8,7 +8,7 @@ const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: "CoreNote",
-  description: "",
+  description: " aplicativo da Web que permita aos usuários criar e gerenciar suas listas de tarefas",
 };
 
 export default function RootLayout({
