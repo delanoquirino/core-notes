@@ -22,7 +22,6 @@ Requisitos Funcionais:
   - React Hook Form
   - Axios
   - Material Ui
-  - Aos
   - Next
   - Tailwind
   - React Icons
