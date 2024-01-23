@@ -2,7 +2,7 @@ import React from "react";
 import { IoIosStar, IoIosStarOutline, IoMdClose } from "react-icons/io";
 import Image from "next/image";
 import { EditBgColor } from "components";
-import { TaskProps } from "types/types";
+import { TaskProps } from "types/Types";
 
 export const CardTasks = ({
   taskData,

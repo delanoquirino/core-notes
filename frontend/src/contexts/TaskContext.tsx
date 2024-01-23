@@ -3,7 +3,7 @@ import axios from "axios";
 import { createContext, useContext, useEffect, useState } from "react";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { TaskContextProps, TaskType } from "types/types";
+import { TaskContextProps, TaskType } from "types/Types";
 
 const TaskContext = createContext<TaskContextProps | undefined>(undefined);
 

@@ -6,7 +6,7 @@ import { useTaskContext } from "contexts";
 
 import { toast } from "react-toastify";
 
-import { TaskContextProps, TaskType } from "types/types";
+import { TaskContextProps, TaskType } from "types/Types";
 
 export const ListTasks = () => {
   const { tasks, setTasks, setOnEdit, loading } =

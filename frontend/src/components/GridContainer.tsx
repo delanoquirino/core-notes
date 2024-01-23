@@ -1,4 +1,4 @@
-import { GridContainerProps } from "types/types";
+import { GridContainerProps } from "types/Types";
 
 export const GridContainer = ({ children }: GridContainerProps) => {
   return (

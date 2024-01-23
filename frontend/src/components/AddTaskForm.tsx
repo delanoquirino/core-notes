@@ -6,7 +6,7 @@ import { SubmitHandler, useForm } from "react-hook-form";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useTaskContext } from "contexts";
-import { Inputs, TaskContextProps } from "types/types";
+import { Inputs, TaskContextProps } from "types/Types";
 import axios from "axios";
 
 export const AddTaskForm = () => {
