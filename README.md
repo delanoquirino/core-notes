@@ -3,7 +3,8 @@
 ### Layout
 
 ![Layout](/frontend/public/readme.png)
-![Layout](/frontend/public/app.webm)
+
+[app.webm](https://github.com/delanoquirino/core-notes/assets/101298043/d3d3e798-d161-4bcb-875b-ad741c30b050)
 
 ### 🧠 About
 
