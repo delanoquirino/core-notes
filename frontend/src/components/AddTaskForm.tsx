@@ -5,29 +5,9 @@ import { GiConfirmed } from "react-icons/gi";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { useTaskContext } from "contexts";
+import { Inputs, TaskContextProps } from "types/types";
 import axios from "axios";
-import { useTaskContext } from "@/context/TaskContext";
-
-type Inputs = {
-  title: string;
-  task: string;
-  favorite: number;
-  bgcolor: string;
-};
-
-type Task = {
-  id: number;
-  title: string;
-  task: string;
-  favorite: number;
-  bgcolor: string;
-};
-
-interface TaskContextProps {
-  onEdit: Task | null;
-  setOnEdit: React.Dispatch<React.SetStateAction<Task | null>>;
-  getTasks: () => Promise<void>;
-}
 
 export const AddTaskForm = () => {
   const { onEdit, setOnEdit, getTasks } = useTaskContext() as TaskContextProps;
