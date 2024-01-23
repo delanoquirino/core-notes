@@ -8,8 +8,25 @@ import { useTaskContext } from "@/context/TaskContext";
 import { Loading } from "./Loading";
 import { GridContainer } from "./GridContainer";
 
+
+type Task = {
+  id: number;
+  title: string;
+  task: string;
+  favorite: number;
+  bgcolor: string;
+};
+
+interface TaskContextProps {
+  tasks: Task[];
+  setTasks: React.Dispatch<React.SetStateAction<Task[]>>;
+  setOnEdit: React.Dispatch<React.SetStateAction<Task | null>>;
+  loading: boolean;
+}
+
 export const CardTask = () => {
-  const { tasks, setTasks, setOnEdit, loading } = useTaskContext();
+  const { tasks, setTasks, setOnEdit, loading } =
+    useTaskContext() as TaskContextProps;
 
   const handleEdit = (taskData: {
     id: number;
@@ -22,29 +39,31 @@ export const CardTask = () => {
   };
 
   const handleDelete = async (id: number) => {
-    await axios
-      .delete("http://localhost:8800/" + id)
-      .then(({ data }) => {
-        const newArray = tasks.filter((task: { id: any }) => task.id! == id);
-        setTasks(newArray);
-        toast.success(data);
-      })
-      .catch(({ data }) => toast.error(data));
+    try {
+      const response = await axios.delete("http://localhost:8800/" + id);
+      const newArray = tasks.filter((task: Task) => task.id !== id);
+      setTasks(newArray);
+      toast.success(response.data);
+    } catch (error) {
+      console.error("Error ao deletar", error);
+    }
   };
 
-  const updateBgBackend = async (cor: string, taskId: number) => {
+  const handleColorSelected = async (cor: string, taskId: number) => {
     const url = `http://localhost:8800/tasks/${taskId}/color`;
 
     try {
       await axios.put(url, { bgcolor: cor });
+      const updatedTasks = tasks.map((task: Task) =>
+        task.id === taskId ? { ...task, bgcolor: cor } : task
+      );
+
+      setTasks(updatedTasks);
     } catch (error) {
       console.error("Erro ao atualizar a cor no backend:", error);
     }
   };
 
-  const handleColorSelected = (cor: string, taskId: number) => {
-    updateBgBackend(cor, taskId);
-  };
   const favoriteTasks = tasks.filter(
     (taskData: { favorite: number }) => taskData.favorite === 1
   );
@@ -61,7 +80,7 @@ export const CardTask = () => {
       ) : (
         <>
           <div className="mt-8">
-            <h2 className="text-[#464646]">Favoritas</h2>
+            <h2 className="text-[#464646] pl-2">Favoritas</h2>
             <GridContainer>
               {favoriteTasks.map(
                 (taskData: {
@@ -73,14 +92,15 @@ export const CardTask = () => {
                 }) => {
                   return (
                     <div
+                      
                       key={taskData.id}
                       style={{ backgroundColor: taskData.bgcolor }}
-                      className="flex flex-col w-full max-w-[300px] h-[437px] mx-auto shadow-md shadow-gray-300 bg-white rounded-3xl"
+                      className="flex flex-col w-full max-w-[300px] h-[350px] mx-auto shadow-md shadow-gray-300 bg-white rounded-3xl"
                     >
                       <div className="py-3 px-4 flex gap-4">
-                        <div className="w-full font-bold text-sm">
+                        <h2 className="w-full font-bold text-sm">
                           {taskData.title}
-                        </div>
+                        </h2>
                         <div>
                           {taskData.favorite ? (
                             <IoIosStar className="text-2xl mr-2 text-yellow-400" />
@@ -89,9 +109,9 @@ export const CardTask = () => {
                           )}
                         </div>
                       </div>
-                      <div className="flex-1 border-t-2 py-3 px-4">
+                      <p className="h-full border-t-2 py-3 px-4">
                         {taskData.task}
-                      </div>
+                      </p>
                       <div className=" py-3 px-4 flex items-center justify-between">
                         <div className="flex gap-2 ">
                           <button
@@ -129,7 +149,7 @@ export const CardTask = () => {
             </GridContainer>
           </div>
           <div className="mt-8">
-            <h2 className="text-[#464646]">Outras</h2>
+            <h2 className="text-[#464646] pl-2">Outras</h2>
             <GridContainer>
               {noFavoriteTasks.map(
                 (taskData: {
@@ -141,14 +161,15 @@ export const CardTask = () => {
                 }) => {
                   return (
                     <div
+                     
                       key={taskData.id}
                       style={{ backgroundColor: taskData.bgcolor }}
-                      className="flex flex-col w-full h-[437px] mx-auto shadow-md shadow-gray-300 bg-white rounded-3xl"
+                      className="flex flex-col w-full max-w-[300px] h-[350px] mx-auto shadow-md shadow-gray-300 bg-white rounded-3xl"
                     >
                       <div className="py-3 px-4 flex gap-4">
-                        <div className="w-full font-bold text-sm">
+                        <h2 className="w-full font-bold text-sm">
                           {taskData.title}
-                        </div>
+                        </h2>
                         <div>
                           {taskData.favorite ? (
                             <IoIosStar className="text-2xl mr-2 text-yellow-400" />
@@ -157,9 +178,11 @@ export const CardTask = () => {
                           )}
                         </div>
                       </div>
-                      <div className="flex-1 border-t-2 py-3 px-4">
-                        {taskData.task}
+
+                      <div className="h-full border-t-2 py-3 px-4">
+                        <p>{taskData.task}</p>
                       </div>
+
                       <div className=" py-3 px-4 flex items-center justify-between">
                         <div className="flex gap-2 ">
                           <button
