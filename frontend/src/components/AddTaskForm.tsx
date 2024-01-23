@@ -11,17 +11,28 @@ import { useTaskContext } from "@/context/TaskContext";
 type Inputs = {
   title: string;
   task: string;
-  favorite: boolean;
-  bgcolor: number;
+  favorite: number;
+  bgcolor: string;
 };
 
+type Task = {
+  id: number;
+  title: string;
+  task: string;
+  favorite: number;
+  bgcolor: string;
+};
+
+interface TaskContextProps {
+  onEdit: Task | null;
+  setOnEdit: React.Dispatch<React.SetStateAction<Task | null>>;
+  getTasks: () => Promise<void>;
+}
+
 export const AddTaskForm = () => {
-  const { onEdit, setOnEdit, getTasks } = useTaskContext();
- 
-  const {
-    handleSubmit,register,
-    reset,setValue,watch,
-  } = useForm<Inputs>();
+  const { onEdit, setOnEdit, getTasks } = useTaskContext() as TaskContextProps;
+
+  const { handleSubmit, register, reset, setValue, watch } = useForm<Inputs>();
 
   useEffect(() => {
     if (onEdit) {
@@ -29,14 +40,12 @@ export const AddTaskForm = () => {
       setValue("task", onEdit.task);
       setValue("favorite", onEdit.favorite);
       setValue("bgcolor", onEdit.bgcolor);
-      
     }
-
   }, [onEdit, setValue]);
 
   const onSubmit: SubmitHandler<Inputs> = async (data: Inputs) => {
     const { title, task, favorite, bgcolor } = data;
-    
+
     const taskData = {
       title: title,
       task: task,
@@ -83,15 +92,14 @@ export const AddTaskForm = () => {
           {...register("title", { required: true })}
         />
         <div>
-        
           <input
-             type="checkbox"
-             id="starCheckbox"
+            type="checkbox"
+            id="starCheckbox"
             {...register("favorite")}
-             className="hidden"
+            className="hidden"
           />
           <label htmlFor="starCheckbox" className="cursor-pointer">
-            { watch("favorite")? (
+            {watch("favorite") ? (
               <IoIosStar className="text-2xl mr-2 text-yellow-400" />
             ) : (
               <IoIosStarOutline className="text-2xl mr-2 " />
@@ -116,5 +124,3 @@ export const AddTaskForm = () => {
     </form>
   );
 };
-
-
