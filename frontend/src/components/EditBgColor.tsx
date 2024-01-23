@@ -54,8 +54,7 @@ export const EditBgColor = ({
         <Image
           src="/ink.svg"
           alt="tinta para trocar de cor"
-          width={16}
-          height={16}
+          fill
         />
       </IconButton>
       <Popover
