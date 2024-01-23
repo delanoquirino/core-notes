@@ -4,7 +4,6 @@ import Popover from "@mui/material/Popover";
 import Typography from "@mui/material/Typography";
 import IconButton from "@mui/material/IconButton";
 import Image from "next/image";
-import { useTaskContext } from "@/context/TaskContext";
 
 export const EditBgColor = ({
   ColorSelected,
