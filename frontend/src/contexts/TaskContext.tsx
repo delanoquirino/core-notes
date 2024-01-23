@@ -1,42 +1,17 @@
 "use client";
 import axios from "axios";
-import {
-  ReactNode,
-  createContext,
-  useContext,
-  useEffect,
-  useState,
-} from "react";
+import { createContext, useContext, useEffect, useState } from "react";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-
-interface Task {
-  id: number;
-  title: string;
-  task: string;
-  favorite: number;
-  bgcolor: string;
-}
-
-
-interface TaskContextProps {
-  tasks: Task[];
-  setTasks: React.Dispatch<React.SetStateAction<Task[]>>;
-  onEdit: Task | null;
-  setOnEdit: React.Dispatch<React.SetStateAction<Task | null>>;
-  getTasks: () => Promise<void>;
-  loading: boolean;
-}
-
-
+import { TaskContextProps, TaskType } from "types/types";
 
 const TaskContext = createContext<TaskContextProps | undefined>(undefined);
 
-export const TaskProvider: React.FC<{ children: ReactNode }> = ({
+export const TaskProvider: React.FC<{ children: React.ReactNode }> = ({
   children,
 }) => {
   const [tasks, setTasks] = useState<any[]>([]);
-  const [onEdit, setOnEdit] = useState<any | null>(null);
+  const [onEdit, setOnEdit] = useState<TaskType | null>(null);
   const [loading, setLoading] = useState(true);
 
   const getTasks = async () => {
