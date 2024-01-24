@@ -1,3 +1,11 @@
+
+# Criando BackEnd
+
+[backend.webm](https://github.com/delanoquirino/core-notes/assets/101298043/4cf0c456-c4fb-4df8-87bc-4e713e573854)
+
+* O nome para o schemma foi utilizado backend2 pois ja tinha criado um chamado backend para o projeto.
+* No final do video usar essa configuração - ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY 'delano123' - para trablhar com MySQL localmente.
+
 1. Arquivo `index.js`
 
 - Criada uma instância do objeto express.
